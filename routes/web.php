@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProyectoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::resource('/Proyectos', App\Http\Controllers\ProyectoController::class);
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('/Proyectos', ProyectoController::class);
+    Route::get('/home', function () {
+        return view('home');
+        
+    })->name('home');
+    
+});
