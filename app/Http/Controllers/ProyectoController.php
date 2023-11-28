@@ -12,8 +12,8 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        $Proyectos = Proyecto::paginate(5);
-        return view('Proyectos.index', compact('Proyectos'));
+        $Proyectos['Proyectos'] = Proyecto::paginate(5);
+        return view('Proyectos.index', $Proyectos);
     }
 
     /**
@@ -29,7 +29,20 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Proyecto =request()->except('_token');
+        $request->validate([
+            'nombre'=>'required', 'descripcion'=>'required','precio'=>'required','imagen' => 'required|image|mimes:jpeg,png,svg|max:1024'  
+        ]);
+
+        $Proyecto = $request->all();
+        if($imagen=$request->file('imagen')) {
+            $rutaGuardarImg = 'imagen/';
+            $imagenProyecto = date('YmdHis').".".$imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg, $imagenProyecto);
+            $Proyecto['imagen']= "$imagenProyecto";
+        }
+        Proyecto::create($Proyecto);
+        return redirect()->route('Proyectos.index');
     }
 
     /**
@@ -43,24 +56,36 @@ class ProyectoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         //
+        //$proyecto = Proyecto::find($id);
+        $Proyecto=Proyecto::find($id);
+        return view('Proyectos.edit', compact('Proyecto'));
+
+        //return view('Proyectos.edit', compact('empleado') );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,  $id)
     {
-        //
+        $Producto = request()->except(['_token','_method']);
+        Proyecto::where('id', '=', $id)->update($Producto);
+
+        $Proyecto=Proyecto::find($id);
+        return view('Proyectos.edit', compact('Proyecto'));
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
-        //
+        Proyecto::destroy($id);
+        return redirect()->route('Proyectos.index');
     }
 }

@@ -1,0 +1,2 @@
+@csrf
+@extends('Galerias.form')

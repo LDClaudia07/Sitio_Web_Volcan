@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProyectoController;
-
+use App\Http\Controllers\GaleriaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,16 +19,23 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-//Route::resource('/Proyectos', App\Http\Controllers\ProyectoController::class);
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//Rutas de Proyectos
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/Proyectos', ProyectoController::class);
     Route::get('/home', function () {
         return view('home');
         
-    })->name('home');
-    
+    })->name('home');   
 });
+//Rutas de galerias
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('/Galerias', GaleriaController::class);
+    Route::get('/home', function () {
+        return view('home');
+        
+    })->name('home');   
+});
+
+
+
+

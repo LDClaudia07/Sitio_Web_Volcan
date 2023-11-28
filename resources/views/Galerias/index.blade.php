@@ -1,13 +1,17 @@
-@extends('Proyectos.create')
-@extends('Proyectos.table')
+@extends('Galerias.create')
+@extends('Galerias.table')
 @sectionMissing('home')
     <div class="pull-right">
         @include('home')
     </div>
 @endif
+
 <div class="container ">
-    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Crear nuevo producto</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+    data-bs-target="#exampleModal" data-bs-whatever="@mdo">Subir nueva Foto</button>
+  <!-- Modal -->
 </div>
+
 <script>
     (function () {
         var forms=document.querySelectorAll('.formEliminar')
