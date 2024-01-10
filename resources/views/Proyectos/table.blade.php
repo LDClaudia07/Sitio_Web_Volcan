@@ -41,7 +41,8 @@
                         
                           <form action="{{ url('/Proyectos/'.$Proyecto->id)}}" method="POST" class="d-inline">
                           @csrf {{ method_field('DELETE') }} 
-                          <button class="btn btn-danger bi bi-trash3-fill"" type="submit" onclick="return confirm ('¿Quieres borrar?')" value="Borar" title="Borrar">
+                          <button class="btn btn-danger bi bi-trash3-fill"" type="submit" onclick="return confirm ('¿Quieres borrar?')" 
+                          value="Borar" title="Borrar">
                           </button>                             
                           </form>           
                       </td>

@@ -1,0 +1,10 @@
+.navbar{
+    background-color: #fff; 
+}
+.card-img-top{
+    overflow: hidden;
+    ransition: transform 0.3s;
+}
+.card-img-top:hover{
+    transform: scale(1.1);
+}
